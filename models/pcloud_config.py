@@ -29,9 +29,9 @@ class PCloudConfig(models.Model):
     name = fields.Char(string='Name', required=True)
     client_id = fields.Char(string='Client ID', required=True)
     client_secret = fields.Char(string='Client Secret', required=True)
-    access_token = fields.Char(string='Access Token', readonly=True)
-    redirect_uri = fields.Char(string='Redirect URI', required=True)
-    hostname = fields.Char(string='Hostname', readonly=True)
+    access_token = fields.Char(string='Access Token')
+    redirect_uri = fields.Char(string='Redirect URI')
+    hostname = fields.Char(string='Hostname')
     db_name = fields.Char(string='Database Name', required=True)
     master_pwd = fields.Char(string='Master Password', required=True)
     backup_format = fields.Selection([
