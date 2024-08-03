@@ -1,0 +1,110 @@
+<odoo>
+    <!-- Form View -->
+    <record id="view_pcloud_configuracion_form" model="ir.ui.view">
+        <field name="name">pcloud.configuracion.form</field>
+        <field name="model">pcloud.configuracion</field>
+        <field name="arch" type="xml">
+            <form string="Configuración de pCloud">
+                <header>
+                    <button string="Conectar a pCloud" type="object" name="action_connect_to_pcloud" class="btn-primary"/>
+                    <button string="Desconectar" type="object" name="action_disconnect_from_pcloud" class="btn-secondary"/>
+                    <button string="Crear Carpeta" type="object" name="create_pcloud_folder" class="btn-info"/>
+                    <button string="Respaldar Base de Datos" type="object" name="backup_database" class="btn-success"/>
+                </header>
+                <group>
+                    <field name="name"/>
+                    <field name="client_id"/>
+                    <field name="client_secret" password="True"/>
+                    <field name="redirect_uri"/>
+                    <field name="access_token" readonly="1" password="True"/>
+                    <field name="hostname" readonly="1"/>
+                    <field name="db_name"/>
+                    <field name="master_pwd" password="True"/>
+                    <field name="backup_format"/>
+                    <field name="notify_user"/>
+                    <field name="user_id"/>
+                    <field name="folder_id" readonly="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- List View -->
+    <record id="view_pcloud_configuracion_tree" model="ir.ui.view">
+        <field name="name">pcloud.configuracion.tree</field>
+        <field name="model">pcloud.configuracion</field>
+        <field name="arch" type="xml">
+            <tree string="Configuración de pCloud">
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="redirect_uri"/>
+                <field name="hostname"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="view_pcloud_configuracion_kanban" model="ir.ui.view">
+        <field name="name">pcloud.configuracion.kanban</field>
+        <field name="model">pcloud.configuracion</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="hostname">
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="redirect_uri"/>
+                <field name="hostname"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="o_kanban_record">
+                            <div class="o_kanban_details">
+                                <strong><field name="name"/></strong>
+                                <div><field name="hostname"/></div>
+                                <div><field name="client_id"/></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Search View -->
+    <record id="view_pcloud_configuracion_search" model="ir.ui.view">
+        <field name="name">pcloud.configuracion.search</field>
+        <field name="model">pcloud.configuracion</field>
+        <field name="arch" type="xml">
+            <search string="Buscar Configuración de pCloud">
+                <field name="name"/>
+                <field name="client_id"/>
+                <field name="hostname"/>
+                <filter name="hostname" string="Hostname" domain="[('hostname', '!=', False)]"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- Graph View -->
+    <record id="view_pcloud_configuracion_graph" model="ir.ui.view">
+        <field name="name">pcloud.configuracion.graph</field>
+        <field name="model">pcloud.configuracion</field>
+        <field name="arch" type="xml">
+            <graph string="Configuración de pCloud">
+                <field name="hostname"/>
+                <field name="name" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_pcloud_config" model="ir.actions.act_window">
+        <field name="name">Configuración de pCloud</field>
+        <field name="res_model">pcloud.configuracion</field>
+        <field name="view_mode">tree,form,kanban,graph</field>
+        <field name="view_id" ref="view_pcloud_configuracion_tree"/>
+        <field name="search_view_id" ref="view_pcloud_configuracion_search"/>
+        <field name="target">current</field>
+    </record>
+
+    <!-- Menu Items -->
+    <menuitem id="menu_pcloud_root" name="pCloud" sequence="10" web_icon="backup_pcloud,static/description/icon.png"/>
+    <menuitem id="menu_pcloud_config" name="Configuración" parent="menu_pcloud_root" action="action_pcloud_config" sequence="10"/>
+</odoo>

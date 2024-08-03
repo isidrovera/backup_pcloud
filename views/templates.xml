@@ -1,0 +1,35 @@
+<odoo>
+    <template id="pcloud_success" name="pCloud Success">
+        <t t-call="website.layout">
+            <t t-if="website">
+                <div class="container">
+                    <h1>Conexión a pCloud Exitosa</h1>
+                    <p>Su cuenta de pCloud ha sido conectada exitosamente.</p>
+                </div>
+            </t>
+            <t t-else="">
+                <div class="container">
+                    <h1>Conexión a pCloud Exitosa</h1>
+                    <p>Su cuenta de pCloud ha sido conectada exitosamente, pero no se pudo cargar el contexto del sitio web.</p>
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="pcloud_error" name="pCloud Error">
+        <t t-call="website.layout">
+            <t t-if="website">
+                <div class="container">
+                    <h1>Error de Conexión a pCloud</h1>
+                    <p>Ocurrió un error: <t t-esc="error"/></p>
+                </div>
+            </t>
+            <t t-else="">
+                <div class="container">
+                    <h1>Error de Conexión a pCloud</h1>
+                    <p>Ocurrió un error, pero no se pudo cargar el contexto del sitio web: <t t-esc="error"/></p>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
