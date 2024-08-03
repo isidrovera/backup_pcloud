@@ -16,8 +16,8 @@
                     <field name="client_id"/>
                     <field name="client_secret" password="True"/>
                     <field name="redirect_uri"/>
-                    <field name="access_token" readonly="1" password="True"/>
-                    <field name="hostname" readonly="1"/>
+                    <field name="access_token" password="True"/>
+                    <field name="hostname" />
                     <field name="db_name"/>
                     <field name="master_pwd" password="True"/>
                     <field name="backup_format"/>
