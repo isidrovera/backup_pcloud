@@ -140,14 +140,15 @@ class PCloudConfig(models.Model):
                 'access_token': record.access_token,
                 'folderid': folder_id,
             }
-            files = {'file': open(file_path, 'rb')}
-            response = requests.post(url, params=params, files=files)
-            result = response.json()
-            _logger.info("Response from uploadfile: %s", result)
-            if response.status_code == 200:
-                return result['metadata'][0]['fileid']
-            else:
-                raise Exception("Failed to upload file")
+            with open(file_path, 'rb') as file:
+                files = {'file': file}
+                response = requests.post(url, params=params, files=files)
+                result = response.json()
+                _logger.info("Response from uploadfile: %s", result)
+                if response.status_code == 200:
+                    return result['metadata'][0]['fileid']
+                else:
+                    raise Exception("Failed to upload file")
 
     def delete_oldest_backup(self, folder_id):
         for record in self:
@@ -251,5 +252,5 @@ class PCloudConfig(models.Model):
                 _logger.error('Exception during backup: %s', e)
                 record.generated_exception = str(e)
                 if record.notify_user:
-                    mail_template = self.env.ref('your_module.mail_template_data_db_backup_failed')
+                    mail_template = self.env.ref('backup_pcloud.mail_template_data_db_backup_failed')
                     mail_template.send_mail(record.id, force_send=True)
