@@ -34,12 +34,12 @@
         <field name="name">pcloud.configuracion.tree</field>
         <field name="model">pcloud.configuracion</field>
         <field name="arch" type="xml">
-            <tree string="Configuración de pCloud">
+            <list string="Configuración de pCloud">
                 <field name="name"/>
                 <field name="client_id"/>
                 <field name="redirect_uri"/>
                 <field name="hostname"/>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -98,7 +98,7 @@
     <record id="action_pcloud_config" model="ir.actions.act_window">
         <field name="name">Configuración de pCloud</field>
         <field name="res_model">pcloud.configuracion</field>
-        <field name="view_mode">tree,form,kanban,graph</field>
+        <field name="view_mode">list,form,kanban,graph</field>
         <field name="view_id" ref="view_pcloud_configuracion_tree"/>
         <field name="search_view_id" ref="view_pcloud_configuracion_search"/>
         <field name="target">current</field>
