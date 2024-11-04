@@ -43,6 +43,8 @@ class PCloudConfig(models.Model):
     backup_filename = fields.Char(string='Backup Filename', help='For Storing generated backup filename')
     generated_exception = fields.Char(string='Exception', help='Exception Encountered while Backup generation')
     folder_id = fields.Char(string='Folder ID', readonly=True)
+    main_folder_id = fields.Char(string='Main Folder ID', help='ID de la carpeta principal de pCloud para almacenar fotos de reparaciones')
+
 
     def action_connect_to_pcloud(self):
         for record in self:
