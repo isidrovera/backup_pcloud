@@ -493,29 +493,18 @@
 
     <record id="action_pcloud_config" model="ir.actions.act_window">
 
-        <field name="name">
-            Backup pCloud
-        </field>
+        <field name="name">Backup pCloud</field>
 
-        <field name="res_model">
-            pcloud.configuracion
-        </field>
+        <field name="res_model">pcloud.configuracio</field>
 
-        <field name="view_mode">
-            list,form
-        </field>
+        <field name="view_mode">list,form</field>
 
-        <field name="view_id"
-               ref="view_pcloud_configuracion_tree"/>
+        <field name="view_id" ref="view_pcloud_configuracion_tree"/>
 
-        <field name="search_view_id"
-               ref="view_pcloud_configuracion_search"/>
+        <field name="search_view_id" ref="view_pcloud_configuracion_search"/>
 
-        <field name="target">
-            current
-        </field>
-
-    </record>
+        <field name="target">current</field>
+</record>
 
 
     <!-- ========================================================= -->
