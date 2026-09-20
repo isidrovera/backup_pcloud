@@ -641,72 +641,7 @@
     </record>
 
 
-    <!-- ============================================================
-         VISTA BÚSQUEDA
-         ============================================================ -->
-
-    <record id="view_pcloud_configuracion_search" model="ir.ui.view">
-        <field name="name">pcloud.configuracion.search</field>
-        <field name="model">pcloud.configuracion</field>
-
-        <field name="arch" type="xml">
-
-            <search string="Buscar configuración de backup">
-
-                <field
-                    name="name"
-                    string="Configuración"
-                />
-
-                <field
-                    name="db_name"
-                    string="Base de datos"
-                />
-
-                <field
-                    name="hostname"
-                    string="Servidor"
-                />
-
-                <field
-                    name="backup_filename"
-                    string="Último backup"
-                />
-
-                <separator/>
-
-                <filter
-                    name="connected"
-                    string="Conectado"
-                    domain="[('access_token', '!=', False)]"
-                />
-
-                <filter
-                    name="disconnected"
-                    string="Desconectado"
-                    domain="[('access_token', '=', False)]"
-                />
-
-                <filter
-                    name="with_error"
-                    string="Con último error"
-                    domain="[('generated_exception', '!=', False)]"
-                />
-
-                <group expand="0" string="Agrupar por">
-
-                    <filter
-                        name="group_backup_format"
-                        string="Formato"
-                        context="{'group_by': 'backup_format'}"
-                    />
-
-                </group>
-
-            </search>
-
-        </field>
-    </record>
+  
 
 
     <!-- ============================================================
@@ -717,7 +652,6 @@
         <field name="name">Backup pCloud</field>
         <field name="res_model">pcloud.configuracion</field>
         <field name="view_mode">kanban,list,form</field>
-        <field name="search_view_id" ref="view_pcloud_configuracion_search"/>
         <field name="target">current</field>
     </record>
 
