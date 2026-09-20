@@ -2,9 +2,9 @@
 
 <odoo>
 
-    <!-- ========================================================= -->
-    <!-- FORM VIEW MODERNA -->
-    <!-- ========================================================= -->
+    <!-- ============================================================
+         VISTA FORMULARIO
+         ============================================================ -->
 
     <record id="view_pcloud_configuracion_form" model="ir.ui.view">
         <field name="name">pcloud.configuracion.form</field>
@@ -14,80 +14,81 @@
 
             <form string="Backup pCloud">
 
-                <!-- ================================================= -->
-                <!-- HEADER -->
-                <!-- ================================================= -->
+                <!-- =================================================
+                     HEADER
+                     ================================================= -->
 
                 <header>
 
                     <button
-                        string="Crear backup ahora"
-                        type="object"
                         name="backup_database"
+                        type="object"
+                        string="Crear backup ahora"
                         class="btn-primary"
                         icon="fa-cloud-upload"
                     />
 
                     <button
-                        string="Conectar a pCloud"
-                        type="object"
                         name="action_connect_to_pcloud"
+                        type="object"
+                        string="Conectar a pCloud"
                         class="btn-secondary"
                         icon="fa-link"
                     />
 
                     <button
-                        string="Desconectar"
-                        type="object"
                         name="action_disconnect_from_pcloud"
+                        type="object"
+                        string="Desconectar"
                         class="btn-secondary"
                         icon="fa-unlink"
                     />
 
                     <button
-                        string="Crear carpeta"
-                        type="object"
                         name="create_pcloud_folder"
+                        type="object"
+                        string="Crear carpeta"
                         class="btn-secondary"
                         icon="fa-folder-open"
                     />
 
                 </header>
 
-
                 <sheet>
 
-                    <!-- ================================================= -->
-                    <!-- TITULO -->
-                    <!-- ================================================= -->
+                    <!-- =================================================
+                         CABECERA / IDENTIFICACIÓN
+                         ================================================= -->
 
                     <div class="oe_title">
 
                         <label
                             for="name"
-                            string="Configuración"
+                            string="Configuración de backup"
                         />
 
                         <h1>
                             <field
                                 name="name"
-                                placeholder="Nombre de la configuración..."
+                                placeholder="Ej. Conexión pCloud"
                             />
                         </h1>
 
-                        <h3>
+                        <div class="text-muted">
+                            <span>Base de datos: </span>
+
                             <field
                                 name="db_name"
                                 readonly="1"
+                                class="oe_inline"
                             />
-                        </h3>
+                        </div>
 
                     </div>
 
-
-                    <!-- ================================================= -->
-                    <!-- RESUMEN -->
-                    <!-- ================================================= -->
+                    <!-- =================================================
+                         RESUMEN PRINCIPAL
+                         ================================================= -->
 
                     <group>
 
@@ -95,8 +96,8 @@
 
                             <field
                                 name="backup_filename"
+                                string="Último archivo"
                                 readonly="1"
-                                string="Último archivo generado"
                             />
 
                             <field
@@ -111,19 +112,18 @@
 
                             <field
                                 name="folder_id"
-                                readonly="1"
                                 string="Carpeta pCloud"
+                                readonly="1"
                             />
 
                         </group>
-
 
                         <group string="Conexión pCloud">
 
                             <field
                                 name="hostname"
+                                string="Servidor pCloud"
                                 readonly="1"
-                                string="Servidor"
                             />
 
                             <field
@@ -136,14 +136,18 @@
                                 string="Redirect URI"
                             />
 
+                            <field
+                                name="notify_user"
+                                string="Notificar resultado"
+                            />
+
                         </group>
 
                     </group>
 
-
-                    <!-- ================================================= -->
-                    <!-- ÚLTIMO ERROR REAL -->
-                    <!-- ================================================= -->
+                    <!-- =================================================
+                         ERROR REAL REGISTRADO
+                         ================================================= -->
 
                     <group
                         string="Último error registrado"
@@ -158,20 +162,19 @@
 
                     </group>
 
-
-                    <!-- ================================================= -->
-                    <!-- NOTEBOOK -->
-                    <!-- ================================================= -->
+                    <!-- =================================================
+                         PESTAÑAS
+                         ================================================= -->
 
                     <notebook>
 
-                        <!-- ============================================= -->
-                        <!-- ESTADO -->
-                        <!-- ============================================= -->
+                        <!-- =============================================
+                             ESTADO
+                             ============================================= -->
 
                         <page
                             string="Estado"
-                            name="status"
+                            name="backup_status"
                         >
 
                             <group>
@@ -180,41 +183,64 @@
 
                                     <field
                                         name="backup_filename"
+                                        string="Archivo generado"
                                         readonly="1"
-                                        string="Archivo"
                                     />
 
                                     <field
                                         name="backup_format"
-                                        readonly="1"
                                         string="Formato"
+                                        readonly="1"
                                     />
 
                                     <field
-                                        name="folder_id"
+                                        name="db_name"
+                                        string="Base de datos"
                                         readonly="1"
-                                        string="ID carpeta pCloud"
                                     />
 
                                 </group>
 
-
-                                <group string="Retención">
+                                <group string="Destino">
 
                                     <field
-                                        name="retention_count"
-                                        string="Cantidad de backups"
+                                        name="hostname"
+                                        string="Servidor"
+                                        readonly="1"
                                     />
 
                                     <field
+                                        name="folder_id"
+                                        string="ID carpeta pCloud"
+                                        readonly="1"
+                                    />
+
+                                    <field
+                                        name="retention_count"
+                                        string="Copias conservadas"
+                                    />
+
+                                </group>
+
+                            </group>
+
+                            <separator
+                                string="Notificaciones"
+                            />
+
+                            <group>
+
+                                <group>
+
+                                    <field
                                         name="notify_user"
-                                        string="Notificar resultado"
+                                        string="Enviar notificación"
                                     />
 
                                     <field
                                         name="user_id"
+                                        string="Usuario"
                                         invisible="not notify_user"
-                                        string="Usuario a notificar"
                                     />
 
                                 </group>
@@ -223,10 +249,9 @@
 
                         </page>
 
-
-                        <!-- ============================================= -->
-                        <!-- CONFIGURACION PCLOUD -->
-                        <!-- ============================================= -->
+                        <!-- =============================================
+                             CONFIGURACIÓN PCLOUD
+                             ============================================= -->
 
                         <page
                             string="pCloud"
@@ -239,33 +264,38 @@
 
                                     <field
                                         name="client_id"
+                                        string="Client ID"
                                     />
 
                                     <field
                                         name="client_secret"
+                                        string="Client Secret"
                                         password="True"
                                     />
 
                                     <field
                                         name="access_token"
+                                        string="Access Token"
                                         password="True"
                                     />
 
                                 </group>
 
-
                                 <group string="Conexión">
 
                                     <field
                                         name="redirect_uri"
+                                        string="Redirect URI"
                                     />
 
                                     <field
                                         name="hostname"
+                                        string="Hostname"
                                     />
 
                                     <field
                                         name="folder_id"
+                                        string="Folder ID"
                                         readonly="1"
                                     />
 
@@ -275,10 +305,9 @@
 
                         </page>
 
-
-                        <!-- ============================================= -->
-                        <!-- CONFIGURACION BACKUP -->
-                        <!-- ============================================= -->
+                        <!-- =============================================
+                             CONFIGURACIÓN BACKUP
+                             ============================================= -->
 
                         <page
                             string="Backup"
@@ -291,32 +320,37 @@
 
                                     <field
                                         name="db_name"
+                                        string="Base"
                                     />
 
                                     <field
                                         name="master_pwd"
+                                        string="Master Password"
                                         password="True"
                                     />
 
                                 </group>
 
-
-                                <group string="Configuración">
+                                <group string="Política de respaldo">
 
                                     <field
                                         name="backup_format"
+                                        string="Formato"
                                     />
 
                                     <field
                                         name="retention_count"
+                                        string="Copias a conservar"
                                     />
 
                                     <field
                                         name="notify_user"
+                                        string="Notificar resultado"
                                     />
 
                                     <field
                                         name="user_id"
+                                        string="Usuario a notificar"
                                         invisible="not notify_user"
                                     />
 
@@ -326,14 +360,13 @@
 
                         </page>
 
-
-                        <!-- ============================================= -->
-                        <!-- LOG / DIAGNOSTICO DISPONIBLE -->
-                        <!-- ============================================= -->
+                        <!-- =============================================
+                             DIAGNÓSTICO
+                             ============================================= -->
 
                         <page
                             string="Diagnóstico"
-                            name="diagnostic"
+                            name="backup_diagnostic"
                         >
 
                             <group>
@@ -342,33 +375,41 @@
 
                                     <field
                                         name="backup_filename"
+                                        string="Último archivo generado"
                                         readonly="1"
-                                        string="Último archivo"
                                     />
 
                                     <field
                                         name="generated_exception"
-                                        readonly="1"
                                         string="Último error"
+                                        readonly="1"
                                     />
 
                                 </group>
 
+                                <group string="Información técnica">
 
-                                <group string="Destino">
+                                    <field
+                                        name="db_name"
+                                        string="Base de datos"
+                                        readonly="1"
+                                    />
 
                                     <field
                                         name="hostname"
+                                        string="Servidor pCloud"
                                         readonly="1"
                                     />
 
                                     <field
                                         name="folder_id"
+                                        string="Folder ID"
                                         readonly="1"
                                     />
 
                                     <field
-                                        name="db_name"
+                                        name="backup_format"
+                                        string="Formato"
                                         readonly="1"
                                     />
 
@@ -385,27 +426,20 @@
             </form>
 
         </field>
-
     </record>
 
 
-    <!-- ========================================================= -->
-    <!-- LIST VIEW -->
-    <!-- ========================================================= -->
+    <!-- ============================================================
+         VISTA LISTA
+         ============================================================ -->
 
     <record id="view_pcloud_configuracion_tree" model="ir.ui.view">
-
-        <field name="name">
-            pcloud.configuracion.list
-        </field>
-
-        <field name="model">
-            pcloud.configuracion
-        </field>
+        <field name="name">pcloud.configuracion.list</field>
+        <field name="model">pcloud.configuracion</field>
 
         <field name="arch" type="xml">
 
-            <list string="Backup pCloud">
+            <list string="Backups pCloud">
 
                 <field
                     name="name"
@@ -435,81 +469,262 @@
                 <field
                     name="backup_filename"
                     string="Último backup"
+                    optional="show"
+                />
+
+                <field
+                    name="generated_exception"
+                    string="Último error"
+                    optional="hide"
                 />
 
             </list>
 
         </field>
-
     </record>
 
 
-    <!-- ========================================================= -->
-    <!-- SEARCH VIEW -->
-    <!-- ========================================================= -->
+    <!-- ============================================================
+         VISTA KANBAN
+         ============================================================ -->
 
-    <record id="view_pcloud_configuracion_search" model="ir.ui.view">
-
-        <field name="name">
-            pcloud.configuracion.search
-        </field>
-
-        <field name="model">
-            pcloud.configuracion
-        </field>
+    <record id="view_pcloud_configuracion_kanban" model="ir.ui.view">
+        <field name="name">pcloud.configuracion.kanban</field>
+        <field name="model">pcloud.configuracion</field>
 
         <field name="arch" type="xml">
 
-            <search string="Buscar configuración pCloud">
+            <kanban>
 
                 <field name="name"/>
-
                 <field name="db_name"/>
-
                 <field name="hostname"/>
+                <field name="backup_format"/>
+                <field name="retention_count"/>
+                <field name="backup_filename"/>
+                <field name="generated_exception"/>
+                <field name="folder_id"/>
+                <field name="access_token"/>
+
+                <templates>
+
+                    <t t-name="card">
+
+                        <div class="p-3">
+
+                            <!-- Nombre -->
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+
+                                <div>
+
+                                    <h4 class="mb-1">
+                                        <field name="name"/>
+                                    </h4>
+
+                                    <div class="text-muted">
+                                        <i class="fa fa-database me-1"/>
+                                        <field name="db_name"/>
+                                    </div>
+
+                                </div>
+
+                                <div>
+
+                                    <t t-if="record.access_token.raw_value">
+
+                                        <span class="badge text-bg-success">
+                                            Conectado
+                                        </span>
+
+                                    </t>
+
+                                    <t t-else="">
+
+                                        <span class="badge text-bg-secondary">
+                                            Desconectado
+                                        </span>
+
+                                    </t>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Servidor -->
+                            <div class="mb-2">
+
+                                <span class="text-muted">
+                                    <i class="fa fa-cloud me-1"/>
+                                    Servidor:
+                                </span>
+
+                                <span>
+                                    <field name="hostname"/>
+                                </span>
+
+                            </div>
+
+                            <!-- Formato -->
+                            <div class="mb-2">
+
+                                <span class="text-muted">
+                                    <i class="fa fa-file-archive-o me-1"/>
+                                    Formato:
+                                </span>
+
+                                <span>
+                                    <field name="backup_format"/>
+                                </span>
+
+                            </div>
+
+                            <!-- Retención -->
+                            <div class="mb-2">
+
+                                <span class="text-muted">
+                                    <i class="fa fa-history me-1"/>
+                                    Retención:
+                                </span>
+
+                                <span>
+                                    <field name="retention_count"/>
+                                    copias
+                                </span>
+
+                            </div>
+
+                            <!-- Último archivo -->
+                            <t t-if="record.backup_filename.raw_value">
+
+                                <div class="mt-3 pt-3 border-top">
+
+                                    <div class="text-muted small mb-1">
+                                        Último backup
+                                    </div>
+
+                                    <div class="text-break">
+                                        <i class="fa fa-check-circle me-1"/>
+                                        <field name="backup_filename"/>
+                                    </div>
+
+                                </div>
+
+                            </t>
+
+                            <!-- Error -->
+                            <t t-if="record.generated_exception.raw_value">
+
+                                <div class="alert alert-danger mt-3 mb-0 py-2">
+
+                                    <div class="fw-bold mb-1">
+                                        <i class="fa fa-exclamation-triangle me-1"/>
+                                        Último error
+                                    </div>
+
+                                    <div class="small text-break">
+                                        <field name="generated_exception"/>
+                                    </div>
+
+                                </div>
+
+                            </t>
+
+                        </div>
+
+                    </t>
+
+                </templates>
+
+            </kanban>
+
+        </field>
+    </record>
+
+
+    <!-- ============================================================
+         VISTA BÚSQUEDA
+         ============================================================ -->
+
+    <record id="view_pcloud_configuracion_search" model="ir.ui.view">
+        <field name="name">pcloud.configuracion.search</field>
+        <field name="model">pcloud.configuracion</field>
+
+        <field name="arch" type="xml">
+
+            <search string="Buscar configuración de backup">
+
+                <field
+                    name="name"
+                    string="Configuración"
+                />
+
+                <field
+                    name="db_name"
+                    string="Base de datos"
+                />
+
+                <field
+                    name="hostname"
+                    string="Servidor"
+                />
+
+                <field
+                    name="backup_filename"
+                    string="Último backup"
+                />
+
+                <separator/>
 
                 <filter
                     name="connected"
-                    string="Con token"
+                    string="Conectado"
                     domain="[('access_token', '!=', False)]"
                 />
 
                 <filter
+                    name="disconnected"
+                    string="Desconectado"
+                    domain="[('access_token', '=', False)]"
+                />
+
+                <filter
                     name="with_error"
-                    string="Con error"
+                    string="Con último error"
                     domain="[('generated_exception', '!=', False)]"
                 />
+
+                <group expand="0" string="Agrupar por">
+
+                    <filter
+                        name="group_backup_format"
+                        string="Formato"
+                        context="{'group_by': 'backup_format'}"
+                    />
+
+                </group>
 
             </search>
 
         </field>
-
     </record>
 
 
-    <!-- ========================================================= -->
-    <!-- ACTION -->
-    <!-- ========================================================= -->
+    <!-- ============================================================
+         ACCIÓN
+         ============================================================ -->
 
     <record id="action_pcloud_config" model="ir.actions.act_window">
-
         <field name="name">Backup pCloud</field>
-
-        <field name="res_model">pcloud.configuracio</field>
-
-        <field name="view_mode">list,form</field>
-
-        <field name="view_id" ref="view_pcloud_configuracion_tree"/>
-
+        <field name="res_model">pcloud.configuracion</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="search_view_id" ref="view_pcloud_configuracion_search"/>
-
         <field name="target">current</field>
-</record>
+    </record>
 
 
-    <!-- ========================================================= -->
-    <!-- MENU -->
-    <!-- ========================================================= -->
+    <!-- ============================================================
+         MENÚ
+         ============================================================ -->
 
     <menuitem
         id="menu_pcloud_root"
